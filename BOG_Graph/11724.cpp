@@ -30,12 +30,13 @@ int main() {
 			numList[i] = 1;
 			while (q.size()) {
 				v = q.front();
-				numList[i] = 1;
+				
 				q.pop();
-				for (int i = 1; i <= N; i++) {
-					if (numList[i] == 1 || !list[v][i])
+				for (int j = 1; j <= N; j++) {
+					if (numList[j] == 1 || !list[v][j])
 						continue;
-					q.push(i);
+					q.push(j);
+					numList[j] = 1;
 				}
 			}
 			result++;
