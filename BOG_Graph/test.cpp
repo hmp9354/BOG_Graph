@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <queue>
 using namespace std;
 
@@ -61,10 +60,9 @@ int makeBridge(int nowNum) {
 void Solution() {
 	int tmp;
 	for (int k = 1; k < IsNum; k++) {
-		tmp = makeBridge(k);
-		cout << "값테스트 : "<<tmp << " " << makeBridge(k) << endl;
+		tmp = makeBridge(k);		
 		if (Result > tmp) {
-			Result = makeBridge(k);
+			Result = tmp;
 		}
 	}
 }
