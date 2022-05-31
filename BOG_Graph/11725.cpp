@@ -1,13 +1,21 @@
 #include <iostream>
+#include <vector>
+using namespace std;
 
-struct Node {
-	int parent;
-	int left = 0;
-	int right = 0;
-};
-
-Node v[100002];
+vector<int> v[100002];
 char check[100002] = { 0, };
+
+void dfs(int r) {
+	
+	for (int i = 0; i < v[r].size(); i++) {
+		int k = v[r][i];
+
+		if (!check[k]) {
+			check[k] = r;
+			dfs(k);
+		}
+	}
+}
 
 int main() {
 	int N;
@@ -18,33 +26,13 @@ int main() {
 		int a, b;
 		scanf_s("%d %d", &a, &b);
 
-		if (check[a]) {
-			if (v[a].left == 0) {
-				v[a].left = b;
-				v[b].parent = a;
-				check[b] = 1;
-			}
-			else {
-				v[a].right = b;
-				v[b].parent = a;
-				check[b] = 1;
-			}
-		}
-		else if (check[b]) {
-			if (v[b].left == 0) {
-				v[b].left = a;
-				v[a].parent = b;
-				check[a] = 1;
-			}
-			else {
-				v[b].right = a;
-				v[a].parent = b;
-				check[a] = 1;
-			}
-		}
+		v[a].push_back(b);
+		v[b].push_back(a);
 	}
 
+	dfs(1);
+
 	for (int i = 2; i <= N; i++) {
-		printf("%d\n", v[i].parent);
+		printf("%d\n", check[i]);
 	}
 }
